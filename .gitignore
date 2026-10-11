@@ -1,0 +1,7 @@
+*
+!.git*
+!*.c
+!*.ld
+!*.h
+!*file
+!LICENSE
