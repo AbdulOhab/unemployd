@@ -1,4 +1,4 @@
-/* LDScript */
+/* vim: ft=c */
 ENTRY(_start)
 SECTIONS
 {

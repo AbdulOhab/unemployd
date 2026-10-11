@@ -11,7 +11,7 @@ CFLAGS    += -Os -s -ffreestanding \
 				-ffunction-sections -fdata-sections \
 				-Wa,--noexecstack
 
-LDFLAGS   += -Wl,--gc-sections -static -no-pie \
+LDFLAGS   += -Wl,--gc-sections -static -no-pie -fuse-ld=bfd \
 				-nostdlib -nostartfiles \
 				-Wl,--build-id=none \
 				-Wl,-z,now -Wl,-T,discard.ld
