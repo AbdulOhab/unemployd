@@ -43,6 +43,13 @@ SECTIONS
 			 pad the .data section.	*/
 			. = ALIGN(. != 0 ? 64 / 8 : 1);
 	}
+	.tbss (NOLOAD) : ALIGN(16)
+	{
+		tls_area = .;
+		*(.tbss.tls_area)
+		*(.tbss .tbss.* .gnu.linkonce.tb.*)
+	}
+
 	_end = .;
 	PROVIDE (end = .);
 	/DISCARD/ : {

@@ -1,14 +1,16 @@
 /* with this... only safe glibc function is syscall */
 
-#include <stdint.h>
 #include "arch.h"
+#include <stdint.h>
 
 #define TLS_SIZE 64
 
-static int64_t  __errno_variable;
-static uintptr_t tls_area[TLS_SIZE] __attribute__((aligned(16))); // tiny TLS block
+static uintptr_t __tls_area__[TLS_SIZE] __attribute__((section(".tbss.tls_area"))); // tiny TLS block
 static void __tls_init(void)
 {
+	static int64_t  __errno_variable = 0;
+	extern uintptr_t tls_area[];
+
 	for (size_t i = 0; i < TLS_SIZE; i++)
 		tls_area[i] = (uintptr_t) &__errno_variable;
 

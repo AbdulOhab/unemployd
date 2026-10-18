@@ -1,5 +1,7 @@
 #ifndef __ARCH_SHIM_H__
 #define __ARCH_SHIM_H__
+#define _GNU_SOURCE
+
 #include <unistd.h>
 #include <sys/syscall.h>
 
