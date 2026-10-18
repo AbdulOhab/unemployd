@@ -1,8 +1,8 @@
 TARGET  ?=
 CC      := $(TARGET)gcc
 STRIP   := $(TARGET)strip
-BIN     := idled
-OBJS    := idled.o nolibc.o
+BIN     := unemployd
+OBJS    := unemployd.o nolibc.o
 
 CFLAGS    += -Os -s -ffreestanding \
 				-fno-stack-protector \

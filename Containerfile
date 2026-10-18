@@ -4,5 +4,5 @@ COPY *.c *.h *.ld Makefile /src
 RUN make
 
 FROM scratch
-COPY --from=builder /src/idled.stripped /idled
-ENTRYPOINT ["/idled"]
+COPY --from=builder /src/unemployd.stripped /unemployd
+ENTRYPOINT ["/unemployd"]
