@@ -1,0 +1,29 @@
+# vim: ts=2:et
+# Docker Compose example.
+services:
+  unemployd:
+    image: ahmubashshir/unemployd:latest
+    restart: unless-stopped
+
+# Kubernetes example
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unemployd
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unemployd
+
+  template:
+    metadata:
+      labels:
+        app: unemployd
+
+    spec:
+      containers:
+        - name: unemployd
+          image: docker.io/ahmubashshir/unemployd:latest
+          imagePullPolicy: IfNotPresent

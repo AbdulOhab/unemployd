@@ -5,3 +5,5 @@
 !*.h
 !*file
 !LICENSE
+!*.md
+!*.yaml
