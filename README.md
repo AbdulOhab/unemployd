@@ -18,6 +18,7 @@ Replace podman with docker if that's your thing.
 
 See [example.yaml](example.yaml) for Kubernetes or Compose.
 
+<!-- build:start -->
 ## Building
 ```sh
 podman build -t unemployd .
@@ -26,6 +27,7 @@ podman build -t unemployd .
 Or use Docker. Whatever keeps you employed.
 
 Or install gcc, then run `make`.
+<!-- build:end -->
 
 ## FAQs
  * Q: Why does this exist?<br />

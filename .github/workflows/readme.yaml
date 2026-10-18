@@ -1,0 +1,30 @@
+name: readme
+
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - README.md
+    - .github/workflows/readme.yaml
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+
+    - name: prepare-readme
+      run: sed -i '/ build:start /,/ build:end /d' README.md
+
+    - name: sync-readme
+      uses: peter-evans/dockerhub-description@v5
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+        repository: ${{ github.repository }}
+        readme-filepath: ./README.md
+        short-description: ${{ github.event.repository.description }}
+        enable-url-completion: true
+# vim: ft=yaml:ts=2:et:
