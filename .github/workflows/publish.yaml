@@ -11,6 +11,7 @@ on:
     - Makefile
     - Dockerfile
     - Containerfile
+    - .github/workflows/publish.yaml
 
 jobs:
   build-push:
