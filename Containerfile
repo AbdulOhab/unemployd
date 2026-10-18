@@ -1,6 +1,6 @@
 FROM docker.io/gcc:16 AS builder
 WORKDIR /src
-COPY *.c *.h *.ld Makefile /src
+COPY --parents=true *.c *.h arch/*.h discard.ld Makefile /src
 RUN make
 
 FROM scratch
