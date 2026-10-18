@@ -14,6 +14,8 @@ __exit(int ret)
 	__builtin_unreachable();
 }
 
+static inline void set_tls_ptr(void *) __attribute__((always_inline));
+
 #if defined(__i386__) || defined(__x86_64__)
 #include "arch/x86.h"
 #elif defined(__aarch64__)

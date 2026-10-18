@@ -2,6 +2,8 @@
 #define __ARCH_SHIM_IMPL__
 #include <asm/prctl.h>
 
-#define set_tls_ptr(ptr) syscall(SYS_arch_prctl, ARCH_SET_FS, ptr)
+static inline void set_tls_ptr(void *ptr) {
+	syscall(SYS_arch_prctl, ARCH_SET_FS, ptr);
+}
 
 #endif /* __ARCH_SHIM_IMPL__ */
