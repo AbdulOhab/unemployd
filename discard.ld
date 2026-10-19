@@ -28,6 +28,8 @@ SECTIONS
 	}
 	_edata = .;
 	PROVIDE (edata = .);
+	/* riscv64: crt1.o references this for gp-relative addressing */
+	PROVIDE (__global_pointer$ = . + 0x800);
 	. = ALIGN(ALIGNOF(NEXT_SECTION));
 	__bss_start = .;
 	.bss						:

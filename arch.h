@@ -22,6 +22,8 @@ static inline void set_tls_ptr(void *) __attribute__((always_inline));
 #include "arch/x86.h"
 #elif defined(__aarch64__)
 #include "arch/arm64.h"
+#elif defined(__riscv) && __riscv_xlen == 64
+#include "arch/riscv64.h"
 #endif /* __ARCH_SHIM_IMPL__ */
 
 #ifndef __ARCH_SHIM_IMPL__
