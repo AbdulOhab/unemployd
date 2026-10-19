@@ -12,11 +12,9 @@ CFLAGS    += -Os -s -ffreestanding \
 				-Wa,--noexecstack
 
 LDFLAGS   += -Wl,--gc-sections -static -no-pie -fuse-ld=bfd \
-				-nostdlib -nostartfiles \
-				-Wl,--build-id=none \
-				-Wl,-z,now -Wl,-T,discard.ld
-LOADLIBES += -l:crt1.o
-LDLIBS    += -lc
+					-nostdlib -nostartfiles \
+					-Wl,--build-id=none \
+					-Wl,-z,now -Wl,-T,discard.ld
 
 all: $(BIN).stripped
 

@@ -21,10 +21,10 @@ int main(void)
 		return 1;
 
 	struct signalfd_siginfo si;
-	while(syscall(SYS_read, fd, &si, sizeof(si)) < 0
-	      ? errno == EINTR
-	      : si.ssi_signo != SIGINT && si.ssi_signo != SIGTERM
-	     );
+	long r;
+	while ((r = syscall(SYS_read, fd, &si, sizeof(si))) == -EINTR
+	       || (r > 0 && si.ssi_signo != SIGINT && si.ssi_signo != SIGTERM))
+		;
 
 	syscall(SYS_close, fd);
 	return 0;

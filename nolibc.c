@@ -1,33 +1,25 @@
-/* with this... only safe glibc function is syscall */
+/* freestanding runtime: raw syscall wrapper and exit */
 
 #include "arch.h"
-#include <stdint.h>
 
-#define TLS_SIZE 64
-
-static uintptr_t __tls_area__[TLS_SIZE] __attribute__((section(".tbss.tls_area"))); // tiny TLS block
-static void __tls_init(void)
+long syscall(long n, ...)
 {
-	static int64_t  __errno_variable = 0;
-	extern uintptr_t tls_area[];
+	__builtin_va_list ap;
+	long a, b, c, d;
 
-	for (size_t i = 0; i < TLS_SIZE; i++)
-		tls_area[i] = (uintptr_t) &__errno_variable;
+	__builtin_va_start(ap, n);
+	a = __builtin_va_arg(ap, long);
+	b = __builtin_va_arg(ap, long);
+	c = __builtin_va_arg(ap, long);
+	d = __builtin_va_arg(ap, long);
+	__builtin_va_end(ap);
 
-	set_tls_ptr(&tls_area[TLS_SIZE / 2]);
+	return __syscall4(n, a, b, c, d);
 }
 
-NORETURN int
-__libc_start_main(
-    int (*main) (int, char * *, char * *),
-    int argc,
-    char **argv,
-    void (*init) (void),
-    void (*fini) (void),
-    void (*rtld_fini) (void),
-    void (* stack_end))
+NORETURN void
+__exit(int ret)
 {
-	__tls_init();
-	__exit(main(argc, argv, &argv[argc + 1]));
+	__syscall4(SYS_exit_group, ret, 0, 0, 0);
 	__builtin_unreachable();
 }

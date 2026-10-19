@@ -7,16 +7,9 @@
 
 #define NORETURN __attribute__((noreturn, used))
 
-// #define set_tls_ptr(ptr)
+NORETURN void __exit(int ret);
 
-NORETURN static inline void
-__exit(int ret)
-{
-	syscall(SYS_exit_group, ret);
-	__builtin_unreachable();
-}
-
-static inline void set_tls_ptr(void *) __attribute__((always_inline));
+static inline long __syscall4(long, long, long, long, long);
 
 #if defined(__i386__) || defined(__x86_64__)
 #include "arch/x86.h"
